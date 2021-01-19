@@ -1,29 +1,17 @@
-const express = require('express')
-const cors = require('cors')
-const {graphqlHTTP} = require('express-graphql')
-const schema = require('./schema/schema.gql.js')
-const users = [{id: 1, username: "Valodik", age: 28}]
+import express from 'express'
+import cors from 'cors'
+import {graphqlHTTP} from 'express-graphql'
+import {schema} from './schema/schema.gql.js'
+import {resolver} from './helper/resolver.graphql.js'
 
-const app = express()
+const port = process.env.PORT || 3011,
+    app = express();
+
 app.use(cors())
-
-const root = {
-    getAllUsers: () => {
-        return users
-    },
-    getUser: ({id}) => {
-        users.find(user => user.id == id)
-    }
-}
-
-
 app.use('/gq', graphqlHTTP({
-    graphiql: true,
+    graphiql: true, 
     schema,
-    rootValue: root,
+    rootValue: resolver,
 }))
-
-const port = process.env.PORT || 3011
-
 
 app.listen(port, () => console.log(`Server is ruuning in port ${port}`))
