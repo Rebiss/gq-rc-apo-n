@@ -4,6 +4,7 @@
   "main": "main.js",
   "author": "rebiss",
   "license": "MIT",
+  "type": "module",
   "private": true,
   "scripts": {
     "start:dev": "node main.js",

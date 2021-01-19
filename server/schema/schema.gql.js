@@ -1,6 +1,6 @@
-const {buildSchema} = require('graphql')
+import {buildSchema} from 'graphql'
 
-const schema = buildSchema(`
+export const schema = buildSchema(`
     type User {
         id: ID
         username: String
@@ -31,6 +31,9 @@ const schema = buildSchema(`
         getAllUsers: [User]
         getUser(id: ID): User
     }
-`)
 
-module.exports =schema
+    type Mutation {
+        createUser(input: UserInput): User
+    }
+`
+)
